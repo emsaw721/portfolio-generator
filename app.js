@@ -22,16 +22,32 @@ const generatePage = require("./src/page-template");
 
 const promptUser = () => {
 return inquirer.prompt([
-  {
     // question object - array of objects in prompt method argument
-    type: "input", 
-    name: "name",
-    message: "What is your name?"
-  }, 
+  {
+    type: 'input',
+    name: 'name',
+    message: 'What is your name? (Required)',
+    validate: nameInput => {
+      if (nameInput) {
+        return true;
+      } else {
+        console.log('Please enter your name!');
+        return false;
+      }
+    }
+  },
   {
     type: "input", 
     name: "github", 
-    message: "Enter your Github username"
+    message: "Enter your Github username (Required)"
+    validate: nameInput => {
+      if (nameInput) {
+        return true;
+      }
+      else{
+        console.log("Please enter your Github username!")
+      }
+    }
   }, 
   {
     type: "input",
@@ -65,6 +81,14 @@ const promptProject = portfolioData => {
       type: 'input',
       name: 'description',
       message: 'Provide a description of the project (Required)'
+      validate: nameInput => {
+        if (nameInput) {
+          return true;
+        }
+        else{
+          console.log("Please enter a project description!")
+        }
+      }
     },
     {
       type: 'checkbox',
@@ -76,6 +100,14 @@ const promptProject = portfolioData => {
       type: 'input',
       name: 'link',
       message: 'Enter the GitHub link to your project. (Required)'
+      validate: nameInput => {
+        if (nameInput) {
+          return true;
+        }
+        else{
+          console.log("Please enter the GitHub link to your project!")
+        }
+      }
     },
     {
       type: 'confirm',
